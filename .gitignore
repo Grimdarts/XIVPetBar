@@ -1,0 +1,4 @@
+# Each player's own settings, created at first load
+data/
+
+*.bak
