@@ -49,4 +49,5 @@ Your choices are saved per character in `data\settings.xml` and come back at the
 
 ## License
 
-BSD 3-Clause. See [LICENSE](LICENSE), which keeps the original xivbar notice.
+BSD 3-Clause, see [LICENSE](LICENSE). The original xivbar notices are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
