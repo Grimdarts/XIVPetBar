@@ -2,6 +2,10 @@
 
 All notable changes to XIVPetBar. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-11-01
+### Added
+- `//petbar hide` and `//petbar show`, e.g. to clear the screen while reading the map (not saved).
+
 ## [1.0.1] - 2026-11-01
 ### Fixed
 - Size, scale, theme and position choices now come back at the next launch. The addon loads

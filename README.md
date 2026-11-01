@@ -36,6 +36,7 @@ this bar uses.
 - `pos 0 10`: move it from the default spot under xivbar, in pixels (x, y)
 - `extras off`: hide the job line
 - `test`: show a sample pet to preview the look; run again to stop
+- `hide` / `show`: hide the bar until shown again (not saved)
 - `reset`: back to defaults
 
 Your choices are saved per character in `data\settings.xml` and come back at the next login.

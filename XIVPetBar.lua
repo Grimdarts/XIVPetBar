@@ -16,13 +16,14 @@ Commands (//petbar or //xpb):
   pos <x> <y>            move it from the default spot under xivbar (pixels)
   extras on|off          job info line
   test                   show a sample pet to preview the look (again to stop)
+  hide | show            hide the bar until shown again (not saved)
   reset                  back to defaults
 Choices are saved per character in data\settings.xml and come back at the next login.
 --]]
 
 _addon.name = 'XIVPetBar'
 _addon.author = 'Someonesmall (with Claude); xivbar by SirEdeonX'
-_addon.version = '1.0.1'
+_addon.version = '1.1.0'
 _addon.commands = {'petbar', 'xpb'}
 
 config = require('config')
@@ -210,6 +211,7 @@ local player = nil
 local shown = false
 local hidden_for_scene = false
 local test_mode = false
+local user_hidden = false -- //petbar hide (e.g. while the map is open); not saved
 local next_poll = 0
 local dirty = false      -- texts need redrawing
 
@@ -383,7 +385,7 @@ windower.register_event('prerender', function()
         dirty = true
     end
 
-    local want = pet ~= nil and not hidden_for_scene and windower.ffxi.get_info().logged_in
+    local want = pet ~= nil and not hidden_for_scene and not user_hidden and windower.ffxi.get_info().logged_in
     if want ~= shown then set_visible(want) end
     if not want then return end
 
@@ -484,6 +486,9 @@ windower.register_event('addon command', function(command, ...)
     elseif command == 'extras' and (args[1] == 'on' or args[1] == 'off') then
         settings.Extras = args[1] == 'on'
         msg('job line ' .. args[1])
+    elseif command == 'hide' or command == 'show' then
+        user_hidden = command == 'hide'
+        return
     elseif command == 'test' then
         test_mode = not test_mode
         pet = nil
@@ -495,7 +500,7 @@ windower.register_event('addon command', function(command, ...)
         for k, v in pairs(defaults) do settings[k] = v end
         msg('settings reset')
     else
-        msg('//petbar full | compact | scale <0.5-2> | theme <ffxiv|ffxi|ffxiv-legacy|auto> | pos <x> <y> | extras on|off | test | reset')
+        msg('//petbar full | compact | scale <0.5-2> | theme <ffxiv|ffxi|ffxiv-legacy|auto> | pos <x> <y> | extras on|off | test | hide | show | reset')
         return
     end
 
